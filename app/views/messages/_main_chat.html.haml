@@ -2,39 +2,26 @@
   .chat-main__group-info
     .chat-main__group-info__current-group
       .chat-main__group-info__current-group__name
-      test
+        =@group.name
       .chat-main__group-info__current-group__member
         Member : 
-        .chat-main__group-info__current-group__member-list
-          masa
+        -@group.users.each do |user|
+          .chat-main__group-info__current-group__member-list
+            = user.name
     .chat-main__group-info__edit-btn
-      %a{href:'#'} Edit
+      = link_to "edit", edit_group_path(@group)
+
   .chat-main__message-list
-    .chat-main__message-list__detail
-      .chat-main__message-list__detail__info
-        .chat-main__message-list__detail__info__name
-          masa
-        .chat-main__message-list__detail__info__time
-          2019/11/20(wed) 17:43:01
-      .chat-main__message-list__detail__message
-        おはよう！
-    
-    .chat-main__message-list__next-detail
-      .chat-main__message-list__next-detail__next-info
-        .chat-main__message-list__next-detail__next-info__next-name
-          masa
-        .chat-main__message-list__next-detail__next-info__next-time
-          2019/11/20(wed) 17:43:34
-      .chat-main__message-list__next-detail__next-message
-        今日は夜から雨
+    = render @messages
   
   .chat-main__message-form
-    .chat-main__message-form__content
-      .chat-main__message-form__content__new-massage
-        %input.chat-main__message-form__content__new-massage__input-text{placeholder: "type a message", type: "tex"}
-        %Label.chat-main__message-form__content__new-massage__input-image
-          = icon('fas', 'image')
-          %input{type: "file"}
-      .chat-main__message-form__content__submit
-        %input.chat-main__message-form__content__submit__submit-btn{"name": "commit", "type": "submit", "value": "Send"}
+    = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
+      .chat-main__message-form__content
+        .chat-main__message-form__content__new-massage
+          = f.text_field :content, class: 'chat-main__message-form__content__new-massage__input-text', placeholder: 'type a message'
+          = f.label :image, class: 'chat-main__message-form__content__new-massage__input-image' do
+            = icon('fas', 'image', class: 'chat-main__message-form__content__new-massage__input-image')
+            = f.file_field :image, class: 'Hidden'
+        = f.submit 'Send', class: 'chat-main__message-form__content__submit'
         
+  
