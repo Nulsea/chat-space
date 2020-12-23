@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.14.1"
+lock "3.14.1"
 
 set :application, "chat-space"
-set :repo_url, "git@example.com:me/my_repo.git"
+
 
 # どのリポジトリからアプリをpullするかを指定する
 set :repo_url,  'git@github.com:Nulsea/chat-space.git'
@@ -15,7 +15,7 @@ set :rbenv_ruby, '2.6.5' #カリキュラム通りに進めた場合、2.6.5で�
 
 # どの公開鍵を利用してデプロイするか
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['<~/.ssh/m-wm7mw7.pem'] 
+                  keys: ['~/.ssh/m-wm7mw7.pem'] 
 
 # プロセス番号を記載したファイルの場所
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
