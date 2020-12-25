@@ -13,7 +13,7 @@ $(function(){
           </div>
           <div class="chat-main__message-list__detail__message">
             ${message.content}
-            <img class="chat-main__message-form__content__new-massage__input-image" src="${message.image}">
+            <img class="Message__image" src="${message.image}">
           </div>
         </div>`
       return html;
